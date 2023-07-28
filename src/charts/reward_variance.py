@@ -44,11 +44,11 @@ max_committees = 4
 max_proposals = 15
 
 # distribution of committee selections per year
-n_committees = [el for el in range(max_committees + 1)]
+n_committees = list(range(max_committees + 1))
 pmf_committees = binom.pmf(n_committees, committees_per_year, COMMITTEE_VALIDATORS / NUM_VALIDATORS)
 
 # distribution of block proposal opportunities per year
-n_proposals = [el for el in range(max_proposals + 1)]
+n_proposals = list(range(max_proposals + 1))
 pmf_proposals = binom.pmf(n_proposals, slots_per_year, 1 / NUM_VALIDATORS)
 
 # calculate all possible reward levels
@@ -79,8 +79,11 @@ for reward_gwei, prob in altair_pmf.items():
             altair_hist[i] += prob
             break
 
-altair_mean = sum([p * r / GWEI_PER_ETH for r, p in altair_pmf.items()])
-altair_sigma = math.sqrt(sum([p * (r / GWEI_PER_ETH)**2 for r, p in altair_pmf.items()]) - altair_mean**2)
+altair_mean = sum(p * r / GWEI_PER_ETH for r, p in altair_pmf.items())
+altair_sigma = math.sqrt(
+    sum(p * (r / GWEI_PER_ETH) ** 2 for r, p in altair_pmf.items())
+    - altair_mean**2
+)
 altair_median = get_quantile(altair_pmf, 0.5) / GWEI_PER_ETH
 
 print('\nAltair annual reward statistics (ETH)')
