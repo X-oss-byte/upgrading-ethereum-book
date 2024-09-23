@@ -31,7 +31,7 @@
     "gatsby-remark-numbered-footnotes": "^1.0.1",
     "gatsby-remark-prismjs": "^7.11.0",
     "gatsby-source-filesystem": "^5.11.0",
-    "gatsby-transformer-remark": "^6.11.0",
+    "gatsby-transformer-remark": "^6.13.1",
     "markdownlint": "^0.29.0",
     "patch-package": "^7.0.0",
     "react": "^18.2.0",
